@@ -1,9 +1,3 @@
-/**
- * Lottószelvény tippelős játék.
- * 
- * * Fejlesztő: Kun András
- */
-
 class Lottery {
 
     static version = "1.0 - Beta";
