@@ -10,8 +10,10 @@ class Lottery {
 
         this.newLottery = document.querySelector("#start-game");
 
+        this.min = this.min || 5;
+        this.max = this.max || 6;
         this.ticket = this.ticket || 5;
-        this.ticketNumbers = this.ticketNumbers;
+        this.ticketNumbers = this.ticketNumbers || 45;
 
         this.ticketDOM = this.ticketDOM || document.querySelectorAll(".lottery-tipped-numbers");
         this.ticketNumberDOM = document.querySelector(".ticket-name");
@@ -29,24 +31,12 @@ class Lottery {
      * @param {val} string
      */
     set value(val) {
-        if (val >= this.min && val <= this.max)
-            this.valueDOM.innerText = val;
-    }
-
-    get value() {
-        return Number(this.valueDOM.dataset.value);
-    }
-
-    /**
-     * @param {val} number
-     */
-    set ticket(val) {
-        if (val <= 6 && val >= 5)
+        if (val <= this.max && val >= this.min)
             this.ticketNumberDOM.innerHTML = val;
     }
 
-    get ticket() {
-        return Number(this.ticketNumberDOM.innerText)
+    get value() {
+        return Number(this.ticketNumberDOM.innerText);
     }
 
     #newLotteryBtn() {

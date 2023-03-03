@@ -6,10 +6,9 @@ let lottery = new Lottery({
     addTo: "main"
 });
 
-// console.log(lottery);
-
 document.querySelector("#start-game").addEventListener("click", function () {
+    console.log(1);
     let level = selection.initValue;
-    // console.log(level);
+    // prize.renderRandomPrize();
     lottery.renderLotteryTickets();
 });
