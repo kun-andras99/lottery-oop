@@ -6,8 +6,6 @@ class Lottery {
      * @param {object} o 
      */
     constructor(o, sel) {
-        this.DOM = document.querySelector(sel);
-
         this.newLottery = document.querySelector("#start-game");
 
         this.min = this.min || 5;

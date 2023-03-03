@@ -1,37 +1,14 @@
 class Selection {
 
-    /**
-     * 
-     * @param {object} o 
-     */
-    constructor(sel) {
-        this.DOM = document.querySelector(sel);
-        // console.log(this.DOM);
-        this.min = Number(this.DOM.dataset.min);
-        this.max = Number(this.DOM.dataset.max);
+    constructor() {
+        this.level = document.querySelector(".ticket-name")
+
+        this.min = Number(this.level.dataset.min);
+        this.max = Number(this.level.dataset.max);
+
         this.init = 0;
 
-        this.build();
-    }
-
-    build() {
-        this.upBtn = this.DOM.querySelector(".ticket-up");
-        // console.log(this.upBtn);
-        this.downBtn = this.DOM.querySelector(".ticket-down");
-
-        this.valueContainer = this.DOM.querySelector(".ticket-name");
-        // console.log(this.valueContainer);
-        let _this = this;
-
-        // this.upBtn.addEventListener("click", function () {
-        //     if (_this.value < _this.max)
-        //         _this.value = ++_this.value
-        // })
-
-        // this.downBtn.addEventListener("click", function () {
-        //     if (_this.value > this.min)
-        //         _this.value = --_this.value
-        // })
+        this.build()
     }
 
     get initValue() {
@@ -39,11 +16,29 @@ class Selection {
     }
 
     get value() {
-        return Number(this.valueContainer)
+        return Number(this.level.innerText)
     }
 
     set value(val) {
         if (val >= this.min && val <= this.max)
-            this.valueContainer.innerText = val;
+            this.level.innerText = val;
+    }
+
+    build() {
+        this.upBtn = document.querySelector(".ticket-up");
+        this.downBtn = document.querySelector(".ticket-down");
+
+        let _this = this;
+
+        this.upBtn.addEventListener("click", function () {
+            console.log(1);
+            if (_this.value < _this.max)
+                _this.value = ++_this.value
+        })
+
+        this.downBtn.addEventListener("click", function () {
+            if (_this.value > _this.min)
+                _this.value = --_this.value
+        })
     }
 }
