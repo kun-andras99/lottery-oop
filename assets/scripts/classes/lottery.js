@@ -69,7 +69,7 @@ class Lottery {
     #checkLotteryValue(num) {
         switch (num) {
             case 5:
-                this.ticket = 6;
+                this.ticket = 5;
                 this.ticketNumbers = 90;
                 break;
             case 6:
