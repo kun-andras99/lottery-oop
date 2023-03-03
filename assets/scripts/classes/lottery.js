@@ -14,6 +14,10 @@ class Lottery {
         this.ticketFields = this.ticketFields || 5;
         this.ticketNumbers = this.ticketNumbers || 90;
 
+        this.prize = o.prize;
+
+        console.log(this.prize);
+
         this.ticketDOM = this.ticketDOM || document.querySelectorAll(".lottery-tipped-numbers");
         this.ticketNumberDOM = document.querySelector(".ticket-name");
         this.ticketLotteryNumsDOM = document.querySelectorAll(".lottery-ticket-number");
