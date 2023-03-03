@@ -3,9 +3,7 @@ document.title = `Lottó - ${Lottery.version}`;
 let selection = new Selection(".ticket-name");
 
 let lottery = new Lottery({
-    addTo: "main",
-    valueDOM: document.querySelector("div[value]"),
-    lotteryValue: document.querySelector(".ticket-name").innerText
+    addTo: "main"
 });
 
 // console.log(lottery);

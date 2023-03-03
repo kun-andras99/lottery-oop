@@ -8,8 +8,7 @@ class Lottery {
     constructor(o, sel) {
         this.DOM = document.querySelector(sel);
 
-        this.newLottery = o.newLottery || document.querySelector("#start-game");
-        this.lotteryValue = o.lotteryValue || 5;
+        this.newLottery = document.querySelector("#start-game");
 
         this.ticket = this.ticket || 5;
         this.ticketNumbers = this.ticketNumbers;
@@ -17,7 +16,6 @@ class Lottery {
         this.ticketDOM = this.ticketDOM || document.querySelectorAll(".lottery-tipped-numbers");
         this.ticketNumberDOM = document.querySelector(".ticket-name");
         this.ticketLotteryNumsDOM = document.querySelectorAll(".lottery-ticket-number");
-
 
         this.complete = true;
 
