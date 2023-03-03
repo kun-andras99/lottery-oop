@@ -1,6 +1,6 @@
-## Lottószelvény kitöltő játék
+# Lottószelvény kitöltő játék
 
-# Működési elv:
+## Működési elv:
 ötös és hatos lottó között tud kiválasztani szelvényt a "fel" és "le" nyilakkal
 
 lottószelvény kitöltése gombra kattintás után legenerálja a valós kinézetű lottószelvényt, felette egy random mostani várható főnyereményt
