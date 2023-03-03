@@ -13,8 +13,8 @@ class Lottery {
         this.min = this.min || 5;
         this.max = this.max || 6;
         this.ticket = this.ticket || 5;
-        this.ticketFields = this.ticketFields || 45;
-        this.ticketNumbers = this.ticketNumbers;
+        this.ticketFields = this.ticketFields || 5;
+        this.ticketNumbers = this.ticketNumbers || 90;
 
         this.ticketDOM = this.ticketDOM || document.querySelectorAll(".lottery-tipped-numbers");
         this.ticketNumberDOM = document.querySelector(".ticket-name");
@@ -69,11 +69,11 @@ class Lottery {
 
     #checkLotteryValue(num) {
         if (num == 5) {
-            this.ticketFields = 5;
-            this.ticketNumbers = 45;
-        } else {
             this.ticketFields = 6;
             this.ticketNumbers = 90;
+        } else {
+            this.ticketFields = 6;
+            this.ticketNumbers = 45;
         }
     }
 
