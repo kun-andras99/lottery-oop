@@ -5,31 +5,66 @@ class Lottery {
     /**
      * @param {object} o 
      */
-    constructor(o) {
-        this.lotteryTicket = o.lotteryTicket || 5;
-        this.tippedNumbers = this.tippedNumbers || [];
+    constructor(o, sel) {
+        this.DOM = document.querySelector(sel);
+
+        this.newLottery = o.newLottery || document.querySelector("#start-game");
+        this.lotteryValue = o.lotteryValue || 5;
+
+        this.ticket = this.ticket || 5;
+        this.ticketNumbers = this.ticketNumbers;
+
+        this.ticketDOM = this.ticketDOM || document.querySelectorAll(".lottery-tipped-numbers");
+        this.ticketNumberDOM = document.querySelector(".ticket-name");
+        this.ticketLotteryNumsDOM = document.querySelectorAll(".lottery-ticket-number");
+
 
         this.complete = true;
 
         this.parentElement = document.querySelector(o.addTo) || document.createElement("div");
 
-        this.create = new Create();
+        this.create = new ElementCreator();
+    }
+
+    /**
+     * 
+     * @param {val} string
+     */
+    set value(val) {
+        if (val >= this.min && val <= this.max)
+            this.valueDOM.innerText = val;
+    }
+
+    get value() {
+        return Number(this.valueDOM.dataset.value);
+    }
+
+    /**
+     * @param {val} number
+     */
+    set ticket(val) {
+        if (val <= 6 && val >= 5)
+            this.ticketNumberDOM.innerHTML = val;
+    }
+
+    get ticket() {
+        return Number(this.ticketNumberDOM.innerText)
+    }
+
+    #newLotteryBtn() {
+        if (this.gameBox) {
+            this.gameBox.remove()
+        }
+
+        this.newLottery.innerText = "Új lottószelvény";
+        this.gameBox = document.createElement("section");
+        this.gameBox.id = "lottery-container";
     }
 
     #lotteryNumberClick(num) {
         let _this = this;
         num.addEventListener("click", function (e) {
-            if (_this.complete) {
-                if (!_this.tippedNumbers.includes(e.target.dataset.lotteryNumber)) {
-                    _this.tippedNumbers.push(e.target.dataset.lotteryNumber)
-                } else {
-                    _this.tippedNumbers.splice(_this.tippedNumbers.indexOf(e.target.dataset.lotteryNumber), 1)
-                }
-                num.classList.toggle("tipped-number")
-            }
-            console.log(_this.tippedNumbers);
-        })
-
+        });
     }
 
     #createNumber(num) {
@@ -43,45 +78,56 @@ class Lottery {
         return number;
     }
 
-    renderLotteryTickets() {
-        if (this.gameBox)
-            this.gameBox.remove()
-
-        this.gameBox = document.createElement("section");
-        this.gameBox.id = "lottery-container";
-
-        switch (true) {
-            case this.lotteryTicket == 5:
-                for (let j = 1; j <= 6; j++) {
-                    let row = this.create.createElement({
-                        tag: "div",
-                        cls: "lottery-tipped-numbers"
-                    });
-                    for (let i = 1; i <= 90; i++) {
-                        row.appendChild(this.#createNumber(i));
-                    }
-                    this.gameBox.appendChild(row)
-                }
+    #checkLotteryValue(num) {
+        switch (num) {
+            case 5:
+                this.ticket = 6;
+                this.ticketNumbers = 90;
                 break;
-
-            case this.lotteryTicket == 6:
-                for (let j = 1; j <= 8; j++) {
-                    let row = this.create.createElement({
-                        tag: "div",
-                        cls: "lottery-tipped-numbers"
-                    });
-                    let lotteryNum = this.create.createElement({
-                        tag: "span",
-                        cls: "lottery-ticket-number"
-                    }, j);
-                    for (let i = 1; i <= 45; i++) {
-                        row.appendChild(this.#createNumber(i));
-                    }
-                    this.gameBox.appendChild(row)
-                    row.appendChild(lotteryNum)
-                }
+            case 6:
+                this.ticket = 6;
+                this.ticketNumbers = 45;
                 break;
         }
+    }
+
+    #createLotteryTicketNumbers(ticketNumbers) {
+        for (let i = 1; i <= ticketNumbers; i++)
+            this.ticketDOM.appendChild(this.#createNumber(i));
+    }
+
+    #createTicketRowAndColumn(num) {
+        this.ticketDOM = this.create.createElement({
+            tag: "div",
+            attributes: {
+                class: "lottery-tipped-numbers"
+            },
+            datasets: {
+                chan: num
+            }
+        });
+        this.ticketLotteryNumsDOM = this.create.createElement({
+            tag: "span",
+            attributes: {
+                class: "lottery-ticket-number"
+            },
+            innerText: num
+        });
+    }
+
+    #createLotteryTicket(val) {
+        for (let i = 1; i <= val; i++) {
+            this.#createTicketRowAndColumn(i)
+            this.#createLotteryTicketNumbers(this.ticketNumbers);
+            this.gameBox.appendChild(this.ticketDOM)
+            this.ticketDOM.appendChild(this.ticketLotteryNumsDOM)
+        }
+    }
+
+    renderLotteryTickets() {
+        this.#newLotteryBtn();
+        this.#checkLotteryValue(this.ticket)
+        this.#createLotteryTicket(this.ticket);
 
         this.parentElement.appendChild(this.gameBox)
     }

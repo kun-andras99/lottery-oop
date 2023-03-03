@@ -109,7 +109,7 @@ button {
     background-color: #F43C16;
     width: fit-content;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2px;
 }
 
@@ -137,7 +137,7 @@ button {
 
 #lottery-container .lottery-tipped-numbers .lottery-ticket-number {
     position: absolute;
-    right: 38px;
+    right: 7px;
     bottom: 2px;
     font-size: 21px;
     font-weight: 700;
