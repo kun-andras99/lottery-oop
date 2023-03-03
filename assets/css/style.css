@@ -39,7 +39,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
 #ticket-select-container {
@@ -91,6 +90,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 #ticket-select-container .ticket-container .ticket-up {
