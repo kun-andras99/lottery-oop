@@ -13,7 +13,8 @@ class Lottery {
         this.min = this.min || 5;
         this.max = this.max || 6;
         this.ticket = this.ticket || 5;
-        this.ticketNumbers = this.ticketNumbers || 45;
+        this.ticketFields = this.ticketFields || 45;
+        this.ticketNumbers = this.ticketNumbers;
 
         this.ticketDOM = this.ticketDOM || document.querySelectorAll(".lottery-tipped-numbers");
         this.ticketNumberDOM = document.querySelector(".ticket-name");
@@ -67,15 +68,12 @@ class Lottery {
     }
 
     #checkLotteryValue(num) {
-        switch (num) {
-            case 5:
-                this.ticket = 5;
-                this.ticketNumbers = 90;
-                break;
-            case 6:
-                this.ticket = 6;
-                this.ticketNumbers = 45;
-                break;
+        if (num == 5) {
+            this.ticketFields = 5;
+            this.ticketNumbers = 45;
+        } else {
+            this.ticketFields = 6;
+            this.ticketNumbers = 90;
         }
     }
 
@@ -103,19 +101,21 @@ class Lottery {
         });
     }
 
-    #createLotteryTicket(val) {
-        for (let i = 1; i <= val; i++) {
+    #createLotteryTicket(fields, numbers) {
+        for (let i = 1; i <= fields; i++) {
             this.#createTicketRowAndColumn(i)
-            this.#createLotteryTicketNumbers(this.ticketNumbers);
+            this.#createLotteryTicketNumbers(numbers);
             this.gameBox.appendChild(this.ticketDOM)
             this.ticketDOM.appendChild(this.ticketLotteryNumsDOM)
         }
     }
 
     renderLotteryTickets() {
+        this.ticket = this.ticketNumberDOM.innerText;
+
         this.#newLotteryBtn();
         this.#checkLotteryValue(this.ticket)
-        this.#createLotteryTicket(this.ticket);
+        this.#createLotteryTicket(this.ticketFields, this.ticketNumbers);
 
         this.parentElement.appendChild(this.gameBox)
     }
